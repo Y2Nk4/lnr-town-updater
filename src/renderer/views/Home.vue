@@ -70,6 +70,7 @@ import config from '@/../config/config'
 import workers from '@/../workers/index'
 import { remote } from 'electron'
 import fileDialog from '@/helpers/fileDialog'
+import { getBundleInfo } from '@/../api/bundleInfo'
 
 export default {
   name: 'Home',
@@ -92,13 +93,7 @@ export default {
   },
   methods: {
     async loadBundleInfo () {
-      this.remoteServerInfo = await workers.fetch(config.bundleInfoJsonUrl, {
-        cache: 'no-store',
-        returnType: 'json',
-        headers: {
-          'Cache-Control': 'no-cache'
-        }
-      })
+      this.remoteServerInfo = await getBundleInfo()
     },
     async selectBundlePath () {
       /* let dir = true

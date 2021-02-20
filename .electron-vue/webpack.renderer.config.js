@@ -106,7 +106,7 @@ let rendererConfig = {
         }
       },
       {
-        test: /\.s(c|a)ss$/,
+        test: /\.sass$/,
         use: [
           'vue-style-loader',
           'css-loader',
@@ -114,6 +114,25 @@ let rendererConfig = {
             loader: 'sass-loader',
             // Requires sass-loader@^8.0.0
             options: {
+              additionalData: "@import '@/sass/variables.scss'",
+              implementation: require('sass'),
+              sassOptions: {
+                indentedSyntax: true // optional
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            // Requires sass-loader@^8.0.0
+            options: {
+              additionalData: "@import '@/sass/variables.scss';",
               implementation: require('sass'),
               sassOptions: {
                 indentedSyntax: true // optional

@@ -6,9 +6,9 @@ export default function () {
       properties: [ 'openDirectory' ]
     })
 
-    ipcRenderer.once('directory-dialog-selected-file', async (event, files) => {
-      console.log('files', files)
-      return resolve(files)
+    ipcRenderer.once('directory-dialog-selected-file', async (event, result) => {
+      console.log('files', result)
+      return resolve(result)
     })
   })
 }

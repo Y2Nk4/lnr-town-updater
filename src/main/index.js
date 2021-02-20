@@ -26,7 +26,9 @@ function createWindow () {
     // 关闭同源策略
     webPreferences: {
       webSecurity: false,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
+      nodeIntegration: true,
+      enableRemoteModule: true
     },
 
     // 设置无边框
@@ -61,13 +63,20 @@ app.on('activate', () => {
   }
 })
 
-ipcMain.on('open-directory-dialog', (event, args) => {
-  dialog.showOpenDialog(
-    mainWindow, args,
-    (files) => {
-      event.sender.send('directory-dialog-selected-file', files)
-    }
-  )
+ipcMain.on('open-directory-dialog', async (event, args) => {
+  console.log('open directory', args)
+  dialog.showOpenDialog(mainWindow, args)
+    .then((result) => {
+      console.log('dsent', result)
+      event.sender.send('directory-dialog-selected-file', result)
+    }).catch(err => {
+      console.log('open directory err', err)
+    })
+})
+
+ipcMain.on('quit-application', () => {
+  console.log('quit-application')
+  app.exit()
 })
 
 /**

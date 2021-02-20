@@ -16,6 +16,11 @@
             color="white">
           {{ config.appName }}
         </v-toolbar-title>
+        <div class="control-bar">
+          <v-btn plain @click="exit">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
       </v-app-bar>
 
       <v-navigation-drawer
@@ -57,6 +62,8 @@
 
 <script>
 import config from '@/../config/config'
+// eslint-disable-next-line no-unused-vars
+import quitApp from '@/helpers/quitApp'
 
 export default {
   name: 'my-project',
@@ -66,6 +73,11 @@ export default {
       group: null,
       config
     }
+  },
+  methods: {
+    exit () {
+      quitApp()
+    }
   }
 }
 </script>
@@ -73,5 +85,9 @@ export default {
 <style lang="less" scoped>
 .app-left-drawer {
   margin-top: 64px;
+}
+div.control-bar{
+  display: inline-block;
+  margin-left: auto;
 }
 </style>
